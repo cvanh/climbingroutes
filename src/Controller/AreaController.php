@@ -15,32 +15,28 @@ class AreaController extends AbstractController
     #[Route('/area', name: 'app_area')]
     public function index(): Response
     {
-
         return $this->render('area/index.html.twig');
     }
 
     #[Route('/area/create', name: 'app_createArea')]
     public function createAreaPage(EntityManagerInterface $entityManager, Request $request): Response
     {
-        // creates a task object and initializes some data for this example
-        $kd = new Area();
-        $form = $this->createForm(AreaFormType::class, $kd);
+        // create new area instance
+        $area = new Area();
+        $form = $this->createForm(AreaFormType::class, $area);
 
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            // $form->getData() holds the submitted values
-            // but, the original `$task` variable has also been updated
-            // $input = $form->getData();
-            // $entityManager->persist($this->getUser());
+            // save fields to db
             $entityManager->persist($form->getData());
+
+            // persist data to db 
             $entityManager->flush();
-            // ... perform some action, such as saving the task to the database
 
+            // redirect to the area overview
             return $this->redirectToRoute('app_home_page');
-
         }
-
 
         return $this->render('area/create.html.twig', [
             'form' => $form,
