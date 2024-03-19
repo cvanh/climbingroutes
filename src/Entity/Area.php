@@ -22,13 +22,13 @@ class Area
     protected ?User $author = null;
 
     #[ORM\Column(length: 255)]
-    protected ?string $name = null;
+    public ?string $name = null;
 
     #[ORM\Column(length: 255, nullable: true)]
-    protected ?string $rock_type = null;
+    public ?string $rock_type = null;
 
     #[ORM\Column(length: 255, nullable: true)]
-    protected ?string $location = null;
+    public ?string $location = null;
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     protected ?string $description = null;

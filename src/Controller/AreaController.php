@@ -47,4 +47,13 @@ class AreaController extends AbstractController
             'form' => $form,
         ]);
     }
+
+    #[Route('/area/{id}', name: 'app_viewArea')]
+    public function viewAreaPage(int $id, AreaRepository $areaRepository): Response
+    {
+        $area = $areaRepository->find($id);
+        return $this->render('area/view.html.twig', [
+            'area' => $area
+        ]);
+    }
 }

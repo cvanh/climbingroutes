@@ -22,11 +22,26 @@
 			create new area
 		</a>
 
-	</br>
 
+		<table>
+			<tr>
+				<th>id</th>
+				<th>name</th>
+				<th>rock_type</th>
+				<th>location</th>
+			</tr>
+			{% for area in areas %}
+				<tr>
+					<td>{{area.id}}</td>
+					<td>{{area.name}}</td>
+					<td>{{area.rock_type}}</td>
+					<td>{{area.location}}</td>
+					<td>
+						<a href="{{ path('app_viewArea', {id: area.id}) }}">view</a>
+					</td>
+				</tr>
+			{% endfor %}
+		</table>
 
-	{% for area in areas %}
-		{{dump(area)}}
-	{% endfor %}
-</div>
+	</div>
 {% endblock %}
