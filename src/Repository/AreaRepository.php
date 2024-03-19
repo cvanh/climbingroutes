@@ -23,6 +23,7 @@ class AreaRepository extends ServiceEntityRepository
 
     public function findAreaInfo(int $id): ?Area
     {
+        // TODO this leaks the authors password 
         $entityManager = $this->getEntityManager();
 
         $query = $entityManager->createQuery(
