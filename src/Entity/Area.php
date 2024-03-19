@@ -17,7 +17,7 @@ class Area
     #[ORM\Column]
     protected ?int $parent_id = null;
 
-    #[ORM\ManyToOne(inversedBy: 'author_id')]
+    #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'user')]
     #[ORM\JoinColumn(nullable: false)]
     protected ?User $author = null;
 

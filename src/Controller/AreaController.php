@@ -16,8 +16,6 @@ class AreaController extends AbstractController
     #[Route('/area', name: 'app_area')]
     public function index(AreaRepository $areaRepository): Response
     {
-        // $k = $entityManager->getRepository(Area::class)->findAll();
-        // $areas = $k->getAuthors();
         $areas = $areaRepository->findAll();
 
         return $this->render('area/index.html.twig', ["areas" => $areas]);
