@@ -17,10 +17,6 @@ class Area
     #[ORM\Column]
     protected ?int $parent_id = null;
 
-    #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'user')]
-    #[ORM\JoinColumn(nullable: false)]
-    protected ?User $author = null;
-
     #[ORM\Column(length: 255)]
     public ?string $name = null;
 
@@ -32,6 +28,10 @@ class Area
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     protected ?string $description = null;
+
+    #[ORM\ManyToOne(inversedBy: 'areas')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?User $author = null;
 
     public function getId(): ?int
     {
@@ -53,18 +53,6 @@ class Area
     public function setParentId(int $parent_id): static
     {
         $this->parent_id = $parent_id;
-
-        return $this;
-    }
-
-    public function getAuthor(): ?User
-    {
-        return $this->author;
-    }
-
-    public function setAuthor(?User $author): static
-    {
-        $this->author = $author;
 
         return $this;
     }
@@ -113,6 +101,18 @@ class Area
     public function setDescription(?string $description): static
     {
         $this->description = $description;
+
+        return $this;
+    }
+
+    public function getAuthor(): ?User
+    {
+        return $this->author;
+    }
+
+    public function setAuthor(?User $author): static
+    {
+        $this->author = $author;
 
         return $this;
     }
