@@ -9,14 +9,6 @@ use Doctrine\ORM\Mapping as ORM;
 #[ORM\Entity(repositoryClass: AreaRepository::class)]
 class Area
 {
-    #[ORM\Id]
-    #[ORM\GeneratedValue]
-    #[ORM\Column]
-    protected ?int $id = null;
-
-    #[ORM\Column]
-    protected ?int $parent_id = null;
-
     #[ORM\Column(length: 255)]
     public ?string $name = null;
 
@@ -25,6 +17,13 @@ class Area
 
     #[ORM\Column(length: 255, nullable: true)]
     public ?string $location = null;
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column]
+    protected ?int $id = null;
+
+    #[ORM\Column]
+    protected ?int $parent_id = null;
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     protected ?string $description = null;

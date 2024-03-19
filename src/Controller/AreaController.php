@@ -18,7 +18,7 @@ class AreaController extends AbstractController
     {
         $areas = $areaRepository->findAll();
 
-        return $this->render('area/index.html.twig', ["areas" => $areas]);
+        return $this->render('area/index.html.twig', ['areas' => $areas]);
     }
 
     #[Route('/area/create', name: 'app_createArea')]
@@ -41,7 +41,7 @@ class AreaController extends AbstractController
             return $this->redirectToRoute('app_home_page');
         }
 
-        $form->get("author")->setData($this->getUser());
+        $form->get('author')->setData($this->getUser());
 
         return $this->render('area/create.html.twig', [
             'form' => $form,
@@ -52,8 +52,9 @@ class AreaController extends AbstractController
     public function viewAreaPage(int $id, AreaRepository $areaRepository): Response
     {
         $area = $areaRepository->findAreaInfo($id);
+
         return $this->render('area/view.html.twig', [
-            'area' => $area
+            'area' => $area,
         ]);
     }
 }
