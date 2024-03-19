@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Area;
 use App\Form\AreaFormType;
+use App\Repository\AreaRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -13,9 +14,13 @@ use Symfony\Component\Routing\Attribute\Route;
 class AreaController extends AbstractController
 {
     #[Route('/area', name: 'app_area')]
-    public function index(): Response
+    public function index(AreaRepository $areaRepository): Response
     {
-        return $this->render('area/index.html.twig');
+        // $k = $entityManager->getRepository(Area::class)->findAll();
+        // $areas = $k->getAuthors();
+        $areas = $areaRepository->findAll();
+
+        return $this->render('area/index.html.twig', ["areas" => $areas]);
     }
 
     #[Route('/area/create', name: 'app_createArea')]
@@ -31,12 +36,14 @@ class AreaController extends AbstractController
             // save fields to db
             $entityManager->persist($form->getData());
 
-            // persist data to db 
+            // persist data to db
             $entityManager->flush();
 
             // redirect to the area overview
             return $this->redirectToRoute('app_home_page');
         }
+
+        $form->get("author")->setData($this->getUser());
 
         return $this->render('area/create.html.twig', [
             'form' => $form,

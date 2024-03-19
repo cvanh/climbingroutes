@@ -17,9 +17,9 @@ class Area
     #[ORM\Column]
     protected ?int $parent_id = null;
 
-    #[ORM\ManyToOne(inversedBy: 'area_id')]
+    #[ORM\ManyToOne(inversedBy: 'author_id')]
     #[ORM\JoinColumn(nullable: false)]
-    protected ?user $author = null;
+    protected ?User $author = null;
 
     #[ORM\Column(length: 255)]
     protected ?string $name = null;
@@ -57,12 +57,12 @@ class Area
         return $this;
     }
 
-    public function getAuthor(): ?user
+    public function getAuthor(): ?User
     {
         return $this->author;
     }
 
-    public function setAuthor(?user $author): static
+    public function setAuthor(?User $author): static
     {
         $this->author = $author;
 
