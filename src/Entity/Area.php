@@ -12,26 +12,26 @@ class Area
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    private ?int $id = null;
+    protected ?int $id = null;
 
     #[ORM\Column]
-    private ?int $parent_id = null;
+    protected ?int $parent_id = null;
 
     #[ORM\ManyToOne(inversedBy: 'area_id')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?user $author = null;
+    protected ?user $author = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $name = null;
+    protected ?string $name = null;
 
     #[ORM\Column(length: 255, nullable: true)]
-    private ?string $rock_type = null;
+    protected ?string $rock_type = null;
 
     #[ORM\Column(length: 255, nullable: true)]
-    private ?string $location = null;
+    protected ?string $location = null;
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
-    private ?string $description = null;
+    protected ?string $description = null;
 
     public function getId(): ?int
     {
