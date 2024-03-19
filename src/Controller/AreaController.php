@@ -51,7 +51,7 @@ class AreaController extends AbstractController
     #[Route('/area/{id}', name: 'app_viewArea')]
     public function viewAreaPage(int $id, AreaRepository $areaRepository): Response
     {
-        $area = $areaRepository->find($id);
+        $area = $areaRepository->findAreaInfo($id);
         return $this->render('area/view.html.twig', [
             'area' => $area
         ]);

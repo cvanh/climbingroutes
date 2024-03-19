@@ -21,6 +21,20 @@ class AreaRepository extends ServiceEntityRepository
         parent::__construct($registry, Area::class);
     }
 
+    public function findAreaInfo(int $id): ?Area
+    {
+        $entityManager = $this->getEntityManager();
+
+        $query = $entityManager->createQuery(
+            'SELECT Area, c
+            FROM App\Entity\Area Area
+            INNER JOIN Area.author c
+            WHERE Area.id = :id'
+        )->setParameter('id', $id);
+
+        return $query->getOneOrNullResult();
+    }
+
     //    /**
     //     * @return Area[] Returns an array of Area objects
     //     */
