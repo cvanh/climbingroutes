@@ -5,8 +5,12 @@ namespace App\Entity;
 use App\Repository\AreaRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Vich\UploaderBundle\Entity\File;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 #[ORM\Entity(repositoryClass: AreaRepository::class)]
+#[Vich\Uploadable]
 class Area
 {
     #[ORM\Column(length: 255)]
@@ -31,6 +35,14 @@ class Area
     #[ORM\ManyToOne(inversedBy: 'areas')]
     #[ORM\JoinColumn(nullable: false)]
     private ?User $author = null;
+
+
+    #[ORM\Column(name: "image", type: "string", length: 255, nullable: true)]
+    protected $image = null;
+
+    #[Vich\UploadableField(mapping: "assets", fileNameProperty: "image")]
+    #[ORM\Column]
+    protected $imageFile;
 
     public function getId(): ?int
     {
@@ -114,5 +126,28 @@ class Area
         $this->author = $author;
 
         return $this;
+    }
+    public function setImage(string $image): static
+    {
+        $this->image = $image;
+
+        return $this;
+    }
+
+    public function getImage(): string
+    {
+        return $this->image;
+    }
+
+    public function setImageFile(UploadedFile $image = null): static
+    {
+        $this->imageFile = $image;
+
+        return $this;
+    }
+
+    public function getImageFile(): File
+    {
+        return $this->imageFile;
     }
 }

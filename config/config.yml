@@ -1,0 +1,22 @@
+neup_flysystem:
+    adapters:
+        assets_adapter:
+            awss3v3:
+                client: app.assets.s3
+                bucket: uploads
+                prefix: assets
+
+    filesystems:
+        assets_fs:
+            adapter:    assets_adapter
+            mount:      assets_fs
+
+vich_uploader:
+    db_driver: orm
+    storage:   flysystem
+
+    mappings:
+        assets:
+            uri_prefix:         /
+            upload_destination: assets_fs
+            namer:              vich_uploader.namer_uniqid

@@ -10,6 +10,7 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Vich\UploaderBundle\Form\Type\VichImageType;
 
 class AreaFormType extends AbstractType
 {
@@ -25,8 +26,10 @@ class AreaFormType extends AbstractType
                 'class' => User::class,
                 'choice_label' => 'id',
             ])
-            ->add('save', SubmitType::class, ['label' => 'Create area'])
-        ;
+            ->add('imageFile', VichImageType::class, [
+                'label' => 'Image', 'required' => false, 'allow_delete' => true
+            ])
+            ->add('save', SubmitType::class, ['label' => 'Create area']);
     }
 
     public function configureOptions(OptionsResolver $resolver): void
