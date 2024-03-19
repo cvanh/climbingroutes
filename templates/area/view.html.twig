@@ -7,6 +7,8 @@
 <twig:Header/>
 
 <div class="container">
+<a href={{path('app_area')}}>go back</a>
+
 	<ul>
 		<li>name:
 			{{area.name}}</li>
@@ -18,6 +20,7 @@
 	<p>{{area.description}}</p>
 <span>written by:
 	{{area.author.email}}</span>
+
 
 
 {{dump(area)}}
