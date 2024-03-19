@@ -3,80 +3,106 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
-class User
+#[ORM\UniqueConstraint(name: 'UNIQ_IDENTIFIER_UUID', fields: ['uuid'])]
+class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $name = null;
+    #[ORM\Column(length: 180)]
+    private ?string $uuid = null;
 
-    #[ORM\OneToMany(targetEntity: Area::class, mappedBy: 'author')]
-    private Collection $area_id;
+    /**
+     * @var list<string> The user roles
+     */
+    #[ORM\Column]
+    private array $roles = [];
 
-    public function __construct()
-    {
-        $this->area_id = new ArrayCollection();
-    }
+    /**
+     * @var string The hashed password
+     */
+    #[ORM\Column]
+    private ?string $password = null;
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function setId(int $id): static
+    public function getUuid(): ?string
     {
-        $this->id = $id;
-
-        return $this;
+        return $this->uuid;
     }
 
-    public function getName(): ?string
+    public function setUuid(string $uuid): static
     {
-        return $this->name;
-    }
-
-    public function setName(string $name): static
-    {
-        $this->name = $name;
+        $this->uuid = $uuid;
 
         return $this;
     }
 
     /**
-     * @return Collection<int, Area>
+     * A visual identifier that represents this user.
+     *
+     * @see UserInterface
      */
-    public function getAreaId(): Collection
+    public function getUserIdentifier(): string
     {
-        return $this->area_id;
+        return (string) $this->uuid;
     }
 
-    public function addAreaId(Area $areaId): static
+    /**
+     * @see UserInterface
+     *
+     * @return list<string>
+     */
+    public function getRoles(): array
     {
-        if (!$this->area_id->contains($areaId)) {
-            $this->area_id->add($areaId);
-            $areaId->setAuthor($this);
-        }
+        $roles = $this->roles;
+        // guarantee every user at least has ROLE_USER
+        $roles[] = 'ROLE_USER';
+
+        return array_unique($roles);
+    }
+
+    /**
+     * @param list<string> $roles
+     */
+    public function setRoles(array $roles): static
+    {
+        $this->roles = $roles;
 
         return $this;
     }
 
-    public function removeAreaId(Area $areaId): static
+    /**
+     * @see PasswordAuthenticatedUserInterface
+     */
+    public function getPassword(): string
     {
-        if ($this->area_id->removeElement($areaId)) {
-            // set the owning side to null (unless already changed)
-            if ($areaId->getAuthor() === $this) {
-                $areaId->setAuthor(null);
-            }
-        }
+        return $this->password;
+    }
+
+    public function setPassword(string $password): static
+    {
+        $this->password = $password;
 
         return $this;
+    }
+
+    /**
+     * @see UserInterface
+     */
+    public function eraseCredentials(): void
+    {
+        // If you store any temporary, sensitive data on the user, clear it here
+        // $this->plainPassword = null;
     }
 }
