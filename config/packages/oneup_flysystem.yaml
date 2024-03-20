@@ -1,0 +1,10 @@
+oneup_flysystem:
+    adapters:
+        assetst_adapter:
+            local:
+                location: '%kernel.project_dir%/public/images/assets'
+
+    filesystems:
+        assets:
+            adapter: assetst_adapter
+            mount: assets

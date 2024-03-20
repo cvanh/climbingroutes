@@ -1,9 +1,11 @@
 vich_uploader:
     db_driver: orm
-    storage:   flysystem
+    storage: flysystem
 
     mappings:
         assets:
-            uri_prefix:         '%env(assets_uri)%'
-            upload_destination: assets_fs
-            namer:              vich_uploader.namer_uniqid
+            uri_prefix: /images/assets
+            upload_destination: oneup_flysystem.assets_filesystem # Use the name you defined for your storage here
+            namer:
+                service: Vich\UploaderBundle\Naming\HashNamer
+                options: { algorithm: 'sha256', length: 50 }

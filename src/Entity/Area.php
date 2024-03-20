@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\AreaRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\File\File as FileFile;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Vich\UploaderBundle\Entity\File;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
@@ -38,7 +39,7 @@ class Area
 
 
     #[ORM\Column(name: "image", type: "string", length: 255, nullable: true)]
-    protected $image = null;
+    protected ?string $image = null;
 
     #[Vich\UploadableField(mapping: "assets", fileNameProperty: "image")]
     #[ORM\Column]
@@ -139,7 +140,7 @@ class Area
         return $this->image;
     }
 
-    public function setImageFile(UploadedFile $image = null): static
+    public function setImageFile(FileFile $image = null): static
     {
         $this->imageFile = $image;
 
