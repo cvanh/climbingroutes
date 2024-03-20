@@ -1,0 +1,9 @@
+vich_uploader:
+    db_driver: orm
+    storage:   flysystem
+
+    mappings:
+        assets:
+            uri_prefix:         '%env(assets_uri)%'
+            upload_destination: assets_fs
+            namer:              vich_uploader.namer_uniqid

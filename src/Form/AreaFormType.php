@@ -27,7 +27,7 @@ class AreaFormType extends AbstractType
                 'choice_label' => 'id',
             ])
             ->add('imageFile', VichImageType::class, [
-                'label' => 'Image', 'required' => false, 'allow_delete' => true
+            'label' => 'Image', 'required' => false
             ])
             ->add('save', SubmitType::class, ['label' => 'Create area']);
     }

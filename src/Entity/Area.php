@@ -134,7 +134,7 @@ class Area
         return $this;
     }
 
-    public function getImage(): string
+    public function getImage()
     {
         return $this->image;
     }
@@ -146,7 +146,7 @@ class Area
         return $this;
     }
 
-    public function getImageFile(): File
+    public function getImageFile()
     {
         return $this->imageFile;
     }

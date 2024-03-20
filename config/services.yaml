@@ -27,7 +27,7 @@ services:
         arguments:
             -
                 version: 'latest'
-                # region: n
+                region: '%env(assets_region)%'
                 credentials:
-                    key: minio-access-key
-                    secret: minio-secret-key
+                    key: '%env(assets_key)%'
+                    secret: '%env(assets_secret)%'
