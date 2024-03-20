@@ -8,11 +8,22 @@
 	<div class="container">
 		<a href={{path('app_area')}}>go back</a>
 
-		<ul>
-			<li>name: {{area.name}}</li>
-			<li>location: {{area.location}}</li>
-			<li>rock type: {{area.rock_type}}</li>
+		<ul class="mdc-list">
+			<li class="mdc-list-item" tabindex="0">
+				{# <span class="mdc-list-item__ripple"></span> #}
+				<span class="mdc-list-item__text">name:
+					{{area.name}}</span>
+			</li>
+			<li class="mdc-list-item">
+				<span class="mdc-list-item__text">location:
+					{{area.location}}</span>
+			</li>
+			<li class="mdc-list-item">
+				<span class="mdc-list-item__text">rock type:
+					{{area.rock_type}}</span>
+			</li>
 		</ul>
+
 		<p>{{area.description}}</p>
 		<span>written by:
 			{{area.author.email}}</span>
