@@ -2,7 +2,7 @@ oneup_flysystem:
     adapters:
         assetst_adapter:
             local:
-                location: '%kernel.project_dir%/public/images/assets'
+                location: '%kernel.project_dir%/public/uploads/area'
 
     filesystems:
         assets:

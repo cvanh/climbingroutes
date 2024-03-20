@@ -3,7 +3,9 @@
 namespace App\Controller;
 
 use App\Entity\Area;
+use App\Entity\Media;
 use App\Form\AreaFormType;
+use App\Form\MediaType;
 use App\Repository\AreaRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -49,12 +51,33 @@ class AreaController extends AbstractController
     }
 
     #[Route('/area/{id}', name: 'app_viewArea')]
-    public function viewAreaPage(int $id, AreaRepository $areaRepository): Response
+    public function viewAreaPage(int $id, AreaRepository $areaRepository, EntityManagerInterface $entityManager, Request $request): Response
     {
         $area = $areaRepository->findAreaInfo($id);
 
+        $media = new Media();
+        $mediaForm = $this->createForm(MediaType::class, $media);
+
+        $mediaForm->handleRequest($request);
+
+        if ($mediaForm->isSubmitted() && $mediaForm->isValid()) {
+            // save fields to db
+            $entityManager->persist($mediaForm->getData());
+
+            // persist data to db
+            $entityManager->flush();
+
+            // redirect to the area overview
+            return $this->redirectToRoute('app_home_page');
+        }
+
+        $media = $area->getMedia();
+
+
         return $this->render('area/view.html.twig', [
             'area' => $area,
+            'media' => $media,
+            'mediaForm' => $mediaForm
         ]);
     }
 }

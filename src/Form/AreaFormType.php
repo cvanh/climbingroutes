@@ -17,7 +17,7 @@ class AreaFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('parent_id', TextType::class)
+            ->add('parent_id', TextType::class, ['required' => false])
             ->add('name', TextType::class)
             ->add('rock_type', TextType::class)
             ->add('location', TextType::class)
@@ -26,9 +26,9 @@ class AreaFormType extends AbstractType
                 'class' => User::class,
                 'choice_label' => 'id',
             ])
-            ->add('imageFile', VichImageType::class, [
-            'label' => 'Image', 'required' => false
-            ])
+            // ->add('imageFile', VichImageType::class, [
+            // 'label' => 'Image', 'required' => false
+            // ])
             ->add('save', SubmitType::class, ['label' => 'Create area']);
     }
 
