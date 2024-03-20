@@ -45,3 +45,13 @@ erDiagram
     AREA||--o{COMMENT : "has"
     AREA||--o{ROUTE : "has"
 ```
+
+
+
+## running 
+have docker instaled and then run `make up`. You may need to run migrations, you can do that with `make sf c=doctrine:migrations:migrate`
+
+
+if you wish to stop run `make down`
+if you wish to see the logs run `make logs`
+if you want something else run `make help` or cry
