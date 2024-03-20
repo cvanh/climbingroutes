@@ -1,14 +1,25 @@
-<div{{attributes}}>
-	<!-- component html -->
-	<a href="{{ path('app_register')}}">
-		register
-	</a>
-	<a href="{{ path('app_login')}}">
-		login
-	</a>
-<a href="{{ path('app_createArea')}}">
+<header class="mdc-top-app-bar" {{attributes}}>
+	<div class="mdc-top-app-bar__row">
+		<section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-start">
+			<span class="mdc-top-app-bar__title">Climbing areas</span>
+		</section>
+		<section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-end" role="toolbar">
+			<a href="{{ path('app_createArea')}}">
+				<button class="material-icons mdc-top-app-bar__action-item mdc-icon-button" aria-label="edit">edit</button>
+			</a>
+			<a href="{{ path('app_login')}}">
 
-		create area
-	</a>
-</div>
+				<button class="material-icons mdc-top-app-bar__action-item mdc-icon-button" aria-label="login">login</button>
+			</a>
 
+
+			<a href="{{ path('app_register')}}">
+				<button class="material-icons mdc-top-app-bar__action-item mdc-icon-button" aria-label="registration">app_registration</button>
+			</a>
+
+		</section>
+
+
+	</div>
+
+</header>

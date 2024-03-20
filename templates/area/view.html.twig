@@ -4,30 +4,28 @@
 {% endblock %}
 
 {% block body %}
-<twig:Header/>
+	<twig:Header/>
+	<div class="container">
+		<a href={{path('app_area')}}>go back</a>
 
-<div class="container">
-<a href={{path('app_area')}}>go back</a>
-
-	<ul>
-		<li>name:
-			{{area.name}}</li>
-		<li>location:
-			{{area.location}}</li>
-		<li>rock type:
-			{{area.rock_type}}</li>
-	</ul>
-	<p>{{area.description}}</p>
-<span>written by:
-	{{area.author.email}}</span>
-
-{{form(mediaForm)}}
+		<ul>
+			<li>name: {{area.name}}</li>
+			<li>location: {{area.location}}</li>
+			<li>rock type: {{area.rock_type}}</li>
+		</ul>
+		<p>{{area.description}}</p>
+		<span>written by:
+			{{area.author.email}}</span>
 
 
-{{dump(media)}}
+		{{form(mediaForm)}}
 
 
-{{dump(area)}}
+			{{dump(media)}}
 
-</div>{% endblock %}
 
+			{{dump(area)}}
+
+
+		</div>
+	{% endblock %}
